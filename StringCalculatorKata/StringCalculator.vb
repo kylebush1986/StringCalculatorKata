@@ -29,7 +29,7 @@
     End Sub
 
     Private Function GetAddendsAsIntegerList(addends As String) As List(Of Integer)
-        Return addends.Split(_delimiters.ToArray()).Select(Function(n) Integer.Parse(n)).ToList()
+        Return addends.Split(_delimiters.ToArray()).Select(Function(n) Integer.Parse(n)).Where(Function(n) n < 1000).ToList()
     End Function
 
     Private Function ProcessCustomDelimiters(addends As String) As String

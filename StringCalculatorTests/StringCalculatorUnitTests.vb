@@ -69,6 +69,13 @@ Namespace String_calculatorTests
             Dim ex = Assert.Throws(Of NegativeNumberException)(Function() _calculator.Add(addends))
             Assert.Equal(ex.Message, expectedMessage)
         End Sub
+
+        <Theory>
+        <InlineData("2, 1001", 2)>
+        Sub NumbersBiggerThan1000AreIgnored(addends As String, expectedSum As Integer)
+            _sum = _calculator.Add(addends)
+            Assert.Equal(expectedSum, _sum)
+        End Sub
     End Class
 End Namespace
 
