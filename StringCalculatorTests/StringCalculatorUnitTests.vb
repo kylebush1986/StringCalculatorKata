@@ -60,6 +60,15 @@ Namespace String_calculatorTests
 
             Assert.Equal(3, _sum)
         End Sub
+
+        <Theory>
+        <InlineData("-2", "negatives not allowed: -2")>
+        <InlineData("1, -2", "negatives not allowed: -2")>
+        <InlineData("1, -2, 3, -4", "negatives not allowed: -2, -4")>
+        Sub NegativeAddends_ThrowsNegativeNumberException(addends As String, expectedMessage As String)
+            Dim ex = Assert.Throws(Of NegativeNumberException)(Function() _calculator.Add(addends))
+            Assert.Equal(ex.Message, expectedMessage)
+        End Sub
     End Class
 End Namespace
 
