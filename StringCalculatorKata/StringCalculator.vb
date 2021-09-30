@@ -4,6 +4,6 @@
             Return 0
         End If
 
-        Return Integer.Parse(addends)
+        Return addends.Split(",").Sum(Function(n) Integer.Parse(n))
     End Function
 End Class

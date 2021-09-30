@@ -1,15 +1,21 @@
 Imports StringCalculatorKata
 Imports Xunit
 
-Namespace StringCalculatorTests
-    Public Class StringCalculatorUnitTests
+Namespace String_calculatorTests
+    Public Class String_calculatorUnitTests
+        Private _calculator As StringCalculator
+        Private _sum As Integer
+
+        Public Sub New()
+            _calculator = New StringCalculator
+            _sum = 0
+        End Sub
+
         <Fact>
         Sub EmptyString_ReturnsZero()
-            Dim calculator = New StringCalculator
+            _sum = _calculator.Add("")
 
-            Dim sum = calculator.Add("")
-
-            Assert.Equal(0, sum)
+            Assert.Equal(0, _sum)
         End Sub
 
 
@@ -17,11 +23,18 @@ Namespace StringCalculatorTests
         <InlineData("2", 2)>
         <InlineData("5", 5)>
         Sub SingleAddend_ReturnsSingleAddendAsSum(addend As String, expectedSum As Integer)
-            Dim calculator = New StringCalculator
+            _sum = _calculator.Add(addend)
 
-            Dim sum = calculator.Add(addend)
+            Assert.Equal(expectedSum, _sum)
+        End Sub
 
-            Assert.Equal(expectedSum, sum)
+        <Theory>
+        <InlineData("1,2", 3)>
+        <InlineData("4,5", 9)>
+        Sub TwoAddends_ReturnsSumOfTwoAddends(addends As String, expectedSum As Integer)
+            _sum = _calculator.Add(addends)
+
+            Assert.Equal(expectedSum, _sum)
         End Sub
     End Class
 End Namespace
