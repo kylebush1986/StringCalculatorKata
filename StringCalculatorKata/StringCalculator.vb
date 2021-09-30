@@ -4,6 +4,6 @@
             Return 0
         End If
 
-        Return addends.Split(",").Sum(Function(n) Integer.Parse(n))
+        Return addends.Split(New Char() {",", vbCrLf}).Sum(Function(n) Integer.Parse(n))
     End Function
 End Class

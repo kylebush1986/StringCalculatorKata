@@ -46,6 +46,13 @@ Namespace String_calculatorTests
 
             Assert.Equal(expectedSum, _sum)
         End Sub
+
+        <Fact>
+        Sub NewlineDelimiter_ReturnsCorrectSum()
+            _sum = _calculator.Add($"1{vbCrLf}2,3")
+
+            Assert.Equal(6, _sum)
+        End Sub
     End Class
 End Namespace
 
