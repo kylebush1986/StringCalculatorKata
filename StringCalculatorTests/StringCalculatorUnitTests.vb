@@ -38,8 +38,9 @@ Namespace String_calculatorTests
         End Sub
 
         <Theory>
-        <InlineData("1,2", 3)>
-        <InlineData("4,5", 9)>
+        <InlineData("1,2,3", 6)>
+        <InlineData("1,2,3,4", 10)>
+        <InlineData("1,2,3,4,5", 15)>
         Sub UnknownNumberOfAddends_ReturnsSumOfAllAddends(addends As String, expectedSum As Integer)
             _sum = _calculator.Add(addends)
 
