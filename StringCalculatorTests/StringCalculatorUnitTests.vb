@@ -72,9 +72,16 @@ Namespace String_calculatorTests
 
         <Theory>
         <InlineData("2, 1001", 2)>
+        <InlineData("6, 1001, 4", 10)>
         Sub NumbersBiggerThan1000AreIgnored(addends As String, expectedSum As Integer)
             _sum = _calculator.Add(addends)
             Assert.Equal(expectedSum, _sum)
+        End Sub
+
+        <Fact>
+        Sub CustomDelimiterOfVariableLength_ReturnsCorrectSum()
+            _sum = _calculator.Add($"//[***]{vbCrLf}1***2***3")
+            Assert.Equal(6, _sum)
         End Sub
     End Class
 End Namespace

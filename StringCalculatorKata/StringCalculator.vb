@@ -1,9 +1,11 @@
-﻿Public Class StringCalculator
+﻿Imports System.Text.RegularExpressions
 
-    Private _delimiters As List(Of Char)
+Public Class StringCalculator
+
+    Private _delimiters As List(Of String)
 
     Sub New()
-        _delimiters = New List(Of Char) From {",", vbCrLf}
+        _delimiters = New List(Of String) From {",", vbCrLf}
     End Sub
 
     Public Function Add(addends As String) As Integer
@@ -29,11 +31,14 @@
     End Sub
 
     Private Function GetAddendsAsIntegerList(addends As String) As List(Of Integer)
-        Return addends.Split(_delimiters.ToArray()).Select(Function(n) Integer.Parse(n)).Where(Function(n) n < 1000).ToList()
+        Return addends.Split(_delimiters.ToArray(), StringSplitOptions.TrimEntries).Select(Function(n) Integer.Parse(n)).Where(Function(n) n < 1000).ToList()
     End Function
 
     Private Function ProcessCustomDelimiters(addends As String) As String
-        If addends.StartsWith("//") Then
+        If addends.StartsWith("//[") Then
+            _delimiters.Add(Regex.Match(addends, "(?<=\[).+?(?=\])", RegexOptions.None).Value)
+            addends = addends.Split(vbCrLf)(1)
+        ElseIf addends.StartsWith("//") Then
             _delimiters.Add(addends(2))
             addends = addends.Split(vbCrLf)(1)
         End If
