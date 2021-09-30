@@ -4,6 +4,13 @@
             Return 0
         End If
 
-        Return addends.Split(New Char() {",", vbCrLf}).Sum(Function(n) Integer.Parse(n))
+        Dim delimiters = New List(Of Char) From {",", vbCrLf}
+
+        If addends.StartsWith("//") Then
+            delimiters.Add(addends(2))
+            addends = addends.Split(vbCrLf)(1)
+        End If
+
+        Return addends.Split(delimiters.ToArray()).Sum(Function(n) Integer.Parse(n))
     End Function
 End Class
