@@ -36,6 +36,15 @@ Namespace String_calculatorTests
 
             Assert.Equal(expectedSum, _sum)
         End Sub
+
+        <Theory>
+        <InlineData("1,2", 3)>
+        <InlineData("4,5", 9)>
+        Sub UnknownNumberOfAddends_ReturnsSumOfAllAddends(addends As String, expectedSum As Integer)
+            _sum = _calculator.Add(addends)
+
+            Assert.Equal(expectedSum, _sum)
+        End Sub
     End Class
 End Namespace
 
