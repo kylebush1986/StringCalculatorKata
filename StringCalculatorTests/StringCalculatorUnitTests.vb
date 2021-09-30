@@ -89,6 +89,12 @@ Namespace String_calculatorTests
             _sum = _calculator.Add($"//[*][%]{vbCrLf}1*2%3")
             Assert.Equal(6, _sum)
         End Sub
+
+        <Fact>
+        Sub MultipleVariableLengthCustomDelimiters_ReturnsCorrectSum()
+            _sum = _calculator.Add($"//[***][%%]{vbCrLf}1***2%%3")
+            Assert.Equal(6, _sum)
+        End Sub
     End Class
 End Namespace
 
