@@ -36,7 +36,10 @@ Public Class StringCalculator
 
     Private Function ProcessCustomDelimiters(addends As String) As String
         If addends.StartsWith("//[") Then
-            _delimiters.Add(Regex.Match(addends, "(?<=\[).+?(?=\])", RegexOptions.None).Value)
+            Dim matches = Regex.Matches(addends, "(?<=\[).+?(?=\])", RegexOptions.None)
+            For Each match As Match In matches
+                _delimiters.Add(match.Value)
+            Next
             addends = addends.Split(vbCrLf)(1)
         ElseIf addends.StartsWith("//") Then
             _delimiters.Add(addends(2))
